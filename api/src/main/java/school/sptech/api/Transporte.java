@@ -1,15 +1,17 @@
 package school.sptech.api;
 
+import java.sql.Time;
 import java.time.LocalTime;
 
 public class Transporte {
+    private Integer id;
     private String linha;
     private String tipo;
     private String origem;
     private String destino;
-    private LocalTime horario;
+    private Time horario;
 
-    public Transporte(String linha, String tipo, String origem, String destino, LocalTime horario) {
+    public Transporte(String linha, String tipo, String origem, String destino, Time horario) {
         this.linha = linha;
         this.tipo = tipo;
         this.origem = origem;
@@ -18,6 +20,14 @@ public class Transporte {
     }
 
     public Transporte() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLinha() {
@@ -52,11 +62,11 @@ public class Transporte {
         this.destino = destino;
     }
 
-    public LocalTime getHorario() {
+    public Time getHorario() {
         return horario;
     }
 
-    public void setHorario(LocalTime horario) {
+    public void setHorario(Time horario) {
         this.horario = horario;
     }
 }
