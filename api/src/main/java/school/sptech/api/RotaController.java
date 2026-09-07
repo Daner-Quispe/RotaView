@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/rotas")
 public class RotaController {
@@ -28,7 +29,7 @@ public class RotaController {
                         ON t.id = r.fkTransporte
                 """;
 
-        List<Transporte> resultado = template.query(sql, new BeanPropertyRowMapper<>(Transporte.class));
+            List<Transporte> resultado = template.query(sql, new BeanPropertyRowMapper<>(Transporte.class));
 
         return ResponseEntity.status(200).body(resultado);
     }

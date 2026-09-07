@@ -38,4 +38,4 @@ SELECT COUNT(*) FROM Transporte AS t JOIN Rota AS r
                     ON t.id = r.fkTransporte
                     WHERE t.operadora = 'CPTM'
                       AND r.partida = 'Francisco'
-                      AND r.destino = 'Barra';
+                      AND r.destino = 'Barra';	
