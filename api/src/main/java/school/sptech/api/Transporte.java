@@ -5,18 +5,19 @@ import java.time.LocalTime;
 
 public class Transporte {
     private Integer id;
-    private String linha;
     private String tipo;
-    private String origem;
+    private String linha;
+    private String operadora;
+    private String partida;
     private String destino;
-    private Time horario;
 
-    public Transporte(String linha, String tipo, String origem, String destino, Time horario) {
-        this.linha = linha;
+    public Transporte(Integer id, String tipo, String linha, String operadora, String partida, String destino) {
+        this.id = id;
         this.tipo = tipo;
-        this.origem = origem;
+        this.linha = linha;
+        this.operadora = operadora;
+        this.partida = partida;
         this.destino = destino;
-        this.horario = horario;
     }
 
     public Transporte() {
@@ -30,14 +31,6 @@ public class Transporte {
         this.id = id;
     }
 
-    public String getLinha() {
-        return linha;
-    }
-
-    public void setLinha(String linha) {
-        this.linha = linha;
-    }
-
     public String getTipo() {
         return tipo;
     }
@@ -46,12 +39,28 @@ public class Transporte {
         this.tipo = tipo;
     }
 
-    public String getOrigem() {
-        return origem;
+    public String getLinha() {
+        return linha;
     }
 
-    public void setOrigem(String origem) {
-        this.origem = origem;
+    public void setLinha(String linha) {
+        this.linha = linha;
+    }
+
+    public String getOperadora() {
+        return operadora;
+    }
+
+    public void setOperadora(String operadora) {
+        this.operadora = operadora;
+    }
+
+    public String getPartida() {
+        return partida;
+    }
+
+    public void setPartida(String partida) {
+        this.partida = partida;
     }
 
     public String getDestino() {
@@ -61,12 +70,5 @@ public class Transporte {
     public void setDestino(String destino) {
         this.destino = destino;
     }
-
-    public Time getHorario() {
-        return horario;
-    }
-
-    public void setHorario(Time horario) {
-        this.horario = horario;
-    }
 }
+
