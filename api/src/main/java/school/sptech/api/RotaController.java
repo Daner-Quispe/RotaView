@@ -12,11 +12,11 @@ import java.sql.Statement;
 import java.util.List;
 
 @RestController
-@RequestMapping("/transporte")
-public class TransporteController {
+@RequestMapping("/rotas")
+public class RotaController {
     private final JdbcTemplate template;
 
-    public TransporteController(JdbcTemplate template) {
+    public RotaController(JdbcTemplate template) {
         this.template = template;
     }
 
@@ -25,19 +25,26 @@ public class TransporteController {
         String sql = """
                 SELECT t.id, t.tipo, t.linha, t.operadora, r.partida, r.destino 
                     FROM Transporte AS t JOIN Rota AS r 
-                        ON t.id = r.fkTransporte;
+                        ON t.id = r.fkTransporte
                 """;
 
-        List<Transporte> resultado =template.query(sql, new BeanPropertyRowMapper<>(Transporte.class));
+        List<Transporte> resultado = template.query(sql, new BeanPropertyRowMapper<>(Transporte.class));
 
         return ResponseEntity.status(200).body(resultado);
     }
 
-    @GetMapping("/rota")
-    public ResponseEntity<List<Transporte>> listarRota() {
-        String sql = "SELECT * FROM rota";
+    @GetMapping("/{id}/paradas")
+   public ResponseEntity<List<Parada>> listarParadas(@PathVariable Integer id) {
+        String sql = """
+                SELECT p.id, p.nomeParada, rp.ordem 
+                    FROM Parada AS p JOIN Rota_parada AS rp
+                        ON p.id = rp.fkParada
+                    WHERE rp.fkRota = ?
+                    ORDER BY rp.ordem
+                """;
 
-        List<Transporte> resultado = template.query(sql, new BeanPropertyRowMapper<>(Transporte.class));
+        List<Parada> resultado = template.query(sql, new BeanPropertyRowMapper<>(Parada.class), id);
+
         return ResponseEntity.status(200).body(resultado);
     }
 
@@ -80,6 +87,38 @@ public class TransporteController {
         return ResponseEntity.status(201).body(transporte);
     }
 
+    @PostMapping("/{id}/paradas")
+    public ResponseEntity<Parada> adicionarParada(@PathVariable Integer id, @RequestBody Parada parada) {
+        if (parada.getNomeParada() == null || parada.getNomeParada().isBlank()) {
+            return ResponseEntity.status(400).build();
+        }
+
+        if (!existeRotaPorId(id)) {
+            return ResponseEntity.status(404).build();
+        }
+
+        String paradaSql = "INSERT INTO Parada (nomeParada) VALUES (?)";
+
+        KeyHolder holder = new GeneratedKeyHolder();
+        template.update(con -> {
+            PreparedStatement statement = con.prepareStatement(
+                    paradaSql, Statement.RETURN_GENERATED_KEYS
+            );
+            statement.setString(1, parada.getNomeParada());
+
+            return statement;
+        }, holder);
+
+        int idGerado= holder.getKey().intValue();
+        parada.setId(idGerado);
+
+        String rotaParadaSql = "INSERT INTO Rota_parada (fkRota, fkParada, ordem) VALUES (?, ?, ?)";
+        template.update(rotaParadaSql, id, idGerado, parada.getOrdem());
+
+        return ResponseEntity.status(201).body(parada);
+    }
+
+
     private boolean existeRota(String tipo, String linha, String operadora, String partida, String destino) {
         String sql = """
                 SELECT COUNT(*) FROM Transporte AS t JOIN Rota AS r 
@@ -91,6 +130,13 @@ public class TransporteController {
                       AND UPPER(r.destino) = UPPER(?)
                 """;
         Integer quantidade = template.queryForObject(sql, Integer.class, tipo, linha, operadora, partida, destino);
+        return quantidade != null && quantidade > 0;
+   }
+
+   private boolean existeRotaPorId(Integer id) {
+        String sql = "SELECT COUNT(*) FROM Rota WHERE id = ?";
+        Integer quantidade = template.queryForObject(sql, Integer.class, id);
+
         return quantidade != null && quantidade > 0;
    }
 
