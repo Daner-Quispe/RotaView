@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { CardRota } from "../componentes/CardRota";
 
 export function CadastroRota() {
     const [tipo, setTipo] = useState("");
@@ -73,18 +74,12 @@ export function CadastroRota() {
 
             <button onClick={cadastrarRota}>Cadastrar rota</button>
 
-            <div>
                 <h2>Todas as rotas</h2>
                 {rotas.map(rota => (
-                    <div key={rota.id}>
-                        <p>Tipo: {rota.tipo}</p>
-                        <p>Linha: {rota.linha}</p>
-                        <p>Operadora: {rota.operadora}</p>
-                        <p>Partida: {rota.partida}</p>
-                        <p>Destino: {rota.destino}</p>
-                    </div>
+                    <CardRota
+                        key={rota.id} 
+                        rota={rota}/>
                 ))}
-            </div>
         </div>
     );
 }

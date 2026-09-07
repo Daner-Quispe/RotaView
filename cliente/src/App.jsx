@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import { CadastroRota } from './CadastroRota'
+import { CadastroRota } from './paginas/CadastroRota'
 
 function App() {
 
