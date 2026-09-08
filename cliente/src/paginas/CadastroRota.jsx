@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { CardRota } from "../componentes/CardRota";
+import "../CadastroRota.css";
 
 export function CadastroRota() {
     const [tipo, setTipo] = useState("");
@@ -52,34 +53,38 @@ export function CadastroRota() {
 
     return (
         <div>
-            <h2>Cadastre uma rota</h2>
+            <div className="form-rota">
+                <h2>Cadastre uma rota</h2>
 
-            <p>
-                Tipo: <select value={tipo} onChange={(evento)=>setTipo(evento.target.value)}>
-                <option value="">Selecione...</option>
-                <option value="Ônibus">Ônibus</option>
-                <option value="Trem">Trem</option>
-                <option value="Metrô">Metrô</option>
-                </select>
-            
-                Linha: <input value={linha} onChange={(evento)=>setLinha(evento.target.value)} />
+                <div className="campo-triplo">
+                        <label> 
+                            Tipo: <select value={tipo} onChange={(evento)=>setTipo(evento.target.value)}>
+                            <option value="">Selecione...</option>
+                            <option value="Ônibus">Ônibus</option>
+                            <option value="Trem">Trem</option>
+                            <option value="Metrô">Metrô</option>
+                            </select>
+                        </label>
+                    
+                        <label>Linha: <input value={linha} onChange={(evento)=>setLinha(evento.target.value)} /></label>
 
-                Operadora: <input value={operadora} onChange={(evento)=>setOperadora(evento.target.value)}/>
-            </p>
+                        <label>Operadora: <input value={operadora} onChange={(evento)=>setOperadora(evento.target.value)}/></label>
+                </div>
 
-            <p>
-                Partida: <input value={partida} onChange={(evento)=>setPartida(evento.target.value)} />
-                Destino: <input value={destino} onChange={(evento)=>setDestino(evento.target.value)} />
-            </p>
+                <div className="campo-duplo">
+                        <label>Partida: <input value={partida} onChange={(evento)=>setPartida(evento.target.value)} /></label>
+                        <label>Destino: <input value={destino} onChange={(evento)=>setDestino(evento.target.value)} /></label>
+                </div>
 
-            <button onClick={cadastrarRota}>Cadastrar rota</button>
+                <button onClick={cadastrarRota}>Cadastrar rota</button>
+            </div>
 
-                <h2>Todas as rotas</h2>
-                {rotas.map(rota => (
-                    <CardRota
-                        key={rota.id} 
-                        rota={rota}/>
-                ))}
+            <h2>Todas as rotas</h2>
+            {rotas.map(rota => (
+                <CardRota
+                    key={rota.id} 
+                    rota={rota}/>
+            ))}
         </div>
     );
 }

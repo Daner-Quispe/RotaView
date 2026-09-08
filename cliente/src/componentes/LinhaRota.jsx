@@ -21,49 +21,43 @@ export function LinhaRota( {rota} ) {
         listarParadas();
     }, [rota.id]);
 
-    function abirModal(ordemNova) {
-        setOrdem(ordemNova);
+    function abirModal() {
+        setOrdem(paradas.length + 1);
         setModal(true);
     }
 
-    const pontos = [
-        {
-            nome: rota.partida,
-            tipo: "partida"
-        },
-
-        ...paradas.map(parada => ({
-            nome: parada.nomeParada,
-            tipo: "parada"
-        })),
-
-        {
-            nome: rota.destino,
-            tipo: "destino"
-        }
-    ];
-
     return(
         <div className="linha-rota">
-            {pontos.map((ponto, index) => {
-                <div className="trecho" key={index}>
+            <div className="ponto">
+                <span className="bolinha"></span>
+                <span className="nome-ponto">{rota.partida}</span>
+            </div>
+
+            {paradas.map((parada) => (
+                <div className="trecho" key={parada.id}>
+                    <div className="linha"></div>
+
                     <div className="ponto">
                         <span className="bolinha"></span>
-                        <span className="nome-ponto">{ponto.nome}</span>
+                        <span className="nome-ponto">{parada.nomeParada}</span>
                     </div>
-
-                    {index < pontos.length-1 && (
-                        <div className="linha-container">
-                            <div className="linha"></div>
-                            <button className="botao-add" onClick={() => abirModal(index + 1)}>
-                                +
-                            </button>
-                        </div>
-                    )}
                 </div>
-            })}
+            ))}
 
-            {abirModal && (
+            <div className="trecho">
+                <div className="linha"></div>
+                <button className="botao-add" onClick={abirModal} title="Adicionar ponto de parada">
+                    +
+                </button>
+                <div className="linha"></div>
+            </div>
+            
+            <div className="ponto">
+                <span className="bolinha"></span>
+                <span className="nome-ponto">{rota.destino}</span>
+            </div>
+
+            {modal && (
                 <ModalParada
                     rotaId={rota.id}
                     ordem={ordem}
