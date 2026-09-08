@@ -1,5 +1,5 @@
 # RotaView
-## Registro de Viagens - Transporte Urbano
+## Registro de rotas - Transporte Urbano
 > Este projeto consiste em um sistema colaborativo de cadastros, construção e visualização de rotas utilizando diferentes tipos de transporte urbano.
 
 A plataforma permite cadastrar uma rota informando o tipo de transporte, a linha utilizada,  operadora e ponto de partida e destino. Após o cadastro a rota pode ser complementada com *pontos de parada*, permitindo que os usuários contribuam para tornar as rotas mais completas.
@@ -11,8 +11,6 @@ A plataforma permite cadastrar uma rota informando o tipo de transporte, a linha
 - Java
 - Spring Boot
 - MySQL
-
----
 
 ### Frontend
 - React
