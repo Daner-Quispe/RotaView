@@ -1,0 +1,43 @@
+.cardInicio {
+    width: 70%;
+    margin: 40px auto;
+    padding: 32px;
+    background-color: rgba(197, 197, 197, 0.512);
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    color: black;
+}
+
+.inicio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 30px;
+    font-weight: 100;
+}
+.inicio h2 {
+    font-size: larger;
+    width: 400px;
+    margin-bottom: 50px
+}
+
+.topicos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.topicos img {
+    width: 150px;
+}
+
+.cardTopico {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.cardTopico p {
+    margin-bottom: 40px;
+}

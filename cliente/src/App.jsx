@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import './App.css'
+import { Cabecalho } from './componentes/Cabecalho'
 import { CadastroRota } from './paginas/CadastroRota'
 
 function App() {

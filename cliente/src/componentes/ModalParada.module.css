@@ -1,0 +1,43 @@
+.modalFundo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background-color: #6565659c;
+}
+
+.modal {
+    background-color: white;
+    padding: 50px;
+    border: 10px 10px 10px 10px black;
+    border-radius: 10px;
+}
+
+.modal h2 {
+    margin-bottom: 30px;
+}
+
+.modal input {
+    font-size: 18px;
+}
+
+.modal button {
+    margin: 20px 0;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+}
+
+.botaoModal{
+ display: flex;
+ justify-content: flex-end;   
+}
+
+.cancelar {
+    margin-right: 5px;
+}
+.adicionar button{
+    background-color: blue;
+    color: white;
+}

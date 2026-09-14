@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ModalParada } from "./ModalParada";
+import styles from "./LinhaRota.module.css";
 
 export function LinhaRota( {rota} ) {
     const [paradas, setParadas] = useState([]);
@@ -27,34 +28,34 @@ export function LinhaRota( {rota} ) {
     }
 
     return(
-        <div className="linha-rota">
-            <div className="ponto">
-                <span className="bolinha"></span>
-                <span className="nome-ponto">{rota.partida}</span>
+        <div className={styles.linhaRota}>
+            <div className={styles.ponto}>
+                <span className={styles.bolinha}></span>
+                <span className={styles.nomePonto}>{rota.partida}</span>
             </div>
 
             {paradas.map((parada) => (
-                <div className="trecho" key={parada.id}>
-                    <div className="linha"></div>
+                <div className={styles.trecho} key={parada.id}>
+                    <div className={styles.linha}></div>
 
-                    <div className="ponto">
-                        <span className="bolinha"></span>
-                        <span className="nome-ponto">{parada.nomeParada}</span>
+                    <div className={styles.ponto}>
+                        <span className={styles.bolinha}></span>
+                        <span className={styles.nomePonto}>{parada.nomeParada}</span>
                     </div>
                 </div>
             ))}
 
-            <div className="trecho">
-                <div className="linha"></div>
-                <button className="botao-add" onClick={abirModal} title="Adicionar ponto de parada">
+            <div className={styles.trecho}>
+                <div className={styles.linha}></div>
+                <button className={styles.botaoAdd} onClick={abirModal} title="Adicionar ponto de parada">
                     +
                 </button>
-                <div className="linha"></div>
+                <div className={styles.linha}></div>
             </div>
             
-            <div className="ponto">
-                <span className="bolinha"></span>
-                <span className="nome-ponto">{rota.destino}</span>
+            <div className={styles.ponto}>
+                <span className={styles.bolinha}></span>
+                <span className={styles.nomePonto}>{rota.destino}</span>
             </div>
 
             {modal && (
